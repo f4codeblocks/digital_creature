@@ -4,7 +4,7 @@ from pathlib import Path
 import requests
 from PySide6.QtCore import QThread, Signal
 
-from ai.prompt import SYSTEM_PROMPT
+from ai.prompt import system_prompt
 
 CONFIG_PATH = Path(__file__).parent.parent / "config" / "config.json"
 
@@ -15,13 +15,14 @@ def _load_config() -> dict:
 
 
 class OllamaClient:
-    """Sends a message to Ollama and returns Cognimon's reply as plain text."""
+    """Sends a message to Ollama and returns the creature's reply as plain text."""
 
-    def __init__(self):
+    def __init__(self, character_name: str = "cognimon"):
         config = _load_config()
         self._host = config["host"]
         self._model = config["model"]
         self._timeout = config["timeout_seconds"]
+        self._system_prompt = system_prompt(character_name.capitalize())
 
     def ask(self, message: str) -> str:
         try:
@@ -30,7 +31,7 @@ class OllamaClient:
                 json={
                     "model": self._model,
                     "messages": [
-                        {"role": "system", "content": SYSTEM_PROMPT},
+                        {"role": "system", "content": self._system_prompt},
                         {"role": "user", "content": message},
                     ],
                     "stream": False,
