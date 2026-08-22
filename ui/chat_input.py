@@ -3,7 +3,7 @@ from PySide6.QtWidgets import QHBoxLayout, QLineEdit, QWidget
 
 
 class ChatInput(QWidget):
-    """Small floating text field for talking to Cognimon."""
+    """Small floating text field for talking to the active creature."""
 
     submitted = Signal(str)
 

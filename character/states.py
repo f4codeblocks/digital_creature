@@ -3,3 +3,6 @@ class State:
     WALK = "walk"
     THINKING = "thinking"
     TALKING = "talking"
+    DAB = "dab"
+    SHOOTING = "shooting"
+    EXIT = "exit"

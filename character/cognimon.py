@@ -65,6 +65,18 @@ class Cognimon:
     def resume(self) -> None:
         self._enter_idle()
 
+    def resume_after_drag(self) -> None:
+        """Restart whatever was playing before a drag paused it, without
+        resetting THINKING/TALKING (that would cut off a pending reply)."""
+        if self.state == State.THINKING:
+            self._thinking_bob.start()
+            self._thinking_frames.start()
+        elif self.state == State.TALKING:
+            self._talking_bob.start()
+            self._talking_frames.start()
+        else:
+            self._enter_idle()
+
     def enter_thinking(self) -> None:
         self.pause()
         self.state = State.THINKING

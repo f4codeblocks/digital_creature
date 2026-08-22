@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QLabel, QVBoxLayout, QWidget
 
 
 class SpeechBubble(QWidget):
-    """Comic-style speech bubble that appears above Cognimon."""
+    """Comic-style speech bubble that appears above the active creature."""
 
     MAX_WIDTH = 260
 
